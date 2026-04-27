@@ -1,0 +1,158 @@
+{
+  "categories": [
+    {
+      "id": "cat-tech",
+      "name": "Tech",
+      "slug": "tech",
+      "description": "AI, software, devices, and the future of product experiences."
+    },
+    {
+      "id": "cat-culture",
+      "name": "Culture",
+      "slug": "culture",
+      "description": "Film, visual arts, and creator economy stories worth your time."
+    },
+    {
+      "id": "cat-music",
+      "name": "Music",
+      "slug": "music",
+      "description": "Industry shifts, sonic trends, and deep profiles of modern artists."
+    },
+    {
+      "id": "cat-design",
+      "name": "Design",
+      "slug": "design",
+      "description": "Architecture, product design, systems thinking, and urban futures."
+    }
+  ],
+  "authors": [
+    {
+      "id": "author-1",
+      "name": "Maya Adebayo",
+      "bio": "Editor-at-large focused on cities, tech, and systems design.",
+      "profileImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80",
+      "socialLinks": {
+        "x": "https://x.com/",
+        "linkedin": "https://www.linkedin.com/"
+      }
+    },
+    {
+      "id": "author-2",
+      "name": "Noah Mensah",
+      "bio": "Culture columnist covering independent media and creative industries.",
+      "profileImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80",
+      "socialLinks": {
+        "x": "https://x.com/"
+      }
+    }
+  ],
+  "articles": [
+    {
+      "id": "art-1",
+      "title": "The New Urban Playbook: Designing Cities for Human Rhythm",
+      "slug": "new-urban-playbook",
+      "subheadline": "From transit-first corridors to mixed-use micro-districts, city teams are redesigning for daily life.",
+      "excerpt": "A long-form look at how design and policy are reshaping modern city experiences.",
+      "content": [
+        "The strongest urban projects begin with one simple premise: people should not have to choose between productivity and quality of life.",
+        "Across major regions, planners are replacing zoning silos with mixed-use ecosystems that shorten commute cycles and improve neighborhood cohesion.",
+        "This transition depends less on flashy technology and more on governance systems that align mobility, housing, and climate commitments."
+      ],
+      "pullQuote": "Good city design makes daily life feel lighter, not louder.",
+      "coverImage": "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1400&q=80",
+      "authorId": "author-1",
+      "categorySlug": "design",
+      "tags": [
+        "cities",
+        "design",
+        "policy"
+      ],
+      "publishedAt": "2026-04-24T09:00:00.000Z",
+      "readingTime": 8,
+      "featured": true,
+      "editorsPick": true,
+      "views": 13240
+    },
+    {
+      "id": "art-2",
+      "title": "AI Ops for Lean Teams: What Actually Scales",
+      "slug": "ai-ops-for-lean-teams",
+      "subheadline": "A practical framework for adoption without bloated tooling or messy workflows.",
+      "excerpt": "How focused teams use AI to accelerate delivery while preserving editorial standards.",
+      "content": [
+        "Small teams win when they automate repetitive work and reserve judgment-heavy decisions for humans.",
+        "The model is simple: one workflow at a time, clear quality gates, and weekly measurement.",
+        "Teams that over-automate too early often increase revision costs. Discipline is the differentiator."
+      ],
+      "pullQuote": "Automation should reduce friction, not editorial standards.",
+      "coverImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
+      "authorId": "author-1",
+      "categorySlug": "tech",
+      "tags": [
+        "ai",
+        "automation",
+        "operations"
+      ],
+      "publishedAt": "2026-04-21T11:00:00.000Z",
+      "readingTime": 6,
+      "featured": true,
+      "editorsPick": true,
+      "views": 11901
+    },
+    {
+      "id": "art-3",
+      "title": "Independent Studios Are Rebuilding Cultural Trust",
+      "slug": "independent-studios-cultural-trust",
+      "subheadline": "Small teams with clear voice are outperforming broad entertainment brands.",
+      "excerpt": "Why local creative ecosystems are becoming globally influential.",
+      "content": [
+        "Independents are succeeding because they can move from insight to release without committee drag.",
+        "Audience loyalty is now tied to perspective and consistency, not just scale.",
+        "The shift is creating room for sustainable, mission-driven media businesses."
+      ],
+      "pullQuote": "People follow perspective before production budget.",
+      "coverImage": "https://images.unsplash.com/photo-1507908708918-778587c9e563?auto=format&fit=crop&w=1400&q=80",
+      "authorId": "author-2",
+      "categorySlug": "culture",
+      "tags": [
+        "culture",
+        "media",
+        "studios"
+      ],
+      "publishedAt": "2026-04-17T10:00:00.000Z",
+      "readingTime": 5,
+      "featured": false,
+      "editorsPick": true,
+      "views": 9780
+    },
+    {
+      "id": "art-4",
+      "title": "The Return of Album Worlds",
+      "slug": "return-of-album-worlds",
+      "subheadline": "Artists are designing multi-format releases with stronger narrative arcs.",
+      "excerpt": "A look at how musicians are blending audio, visuals, and live formats.",
+      "content": [
+        "The album format is evolving from a playlist of tracks into a narrative system.",
+        "Visual storytelling, intimate venue runs, and creator-owned channels are central to this trend.",
+        "For listeners, the result is deeper attachment and longer retention."
+      ],
+      "pullQuote": "Format is becoming part of the story again.",
+      "coverImage": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1400&q=80",
+      "authorId": "author-2",
+      "categorySlug": "music",
+      "tags": [
+        "music",
+        "albums",
+        "storytelling"
+      ],
+      "publishedAt": "2026-04-14T08:30:00.000Z",
+      "readingTime": 4,
+      "featured": false,
+      "editorsPick": false,
+      "views": 8874
+    }
+  ],
+  "subscribers": [
+    "babatundedesigner@gmail.com"
+  ]
+}

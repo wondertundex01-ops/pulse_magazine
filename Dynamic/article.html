@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Article • Pulse Magazine</title>
+    <meta name="description" content="Read long-form editorial features on Pulse Magazine." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-page="article">
+    <div class="reading-progress" id="readingProgress"></div>
+    <div id="siteHeader"></div>
+
+    <main>
+      <section class="section">
+        <div class="container article-shell">
+          <a id="backToCategory" class="link" href="./category.html">← Back to category</a>
+
+          <div id="articleNotFound" class="notice" hidden>
+            <h2>Article not found</h2>
+            <p>The story could not be found. Please return to <a class="link" href="./category.html">categories</a>.</p>
+          </div>
+
+          <article class="article" id="articleContent">
+            <h1 id="articleTitle" class="article-title"></h1>
+            <p id="articleSubtitle" class="article-subtitle"></p>
+            <p id="articleMeta" class="article-meta"></p>
+            <img id="articleImage" class="article-image" alt="" loading="lazy" />
+            <div id="articleBody" class="article-body"></div>
+            <blockquote id="pullQuote" class="pull-quote"></blockquote>
+          </article>
+
+          <section class="related-wrap">
+            <h2>Related Articles</h2>
+            <div id="relatedStories" class="stories-grid"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <div id="siteFooter"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>

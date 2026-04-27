@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categories • Pulse Magazine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-page="category">
+    <div id="siteHeader"></div>
+
+    <main>
+      <section class="section">
+        <div class="container">
+          <article class="category-feature" id="categoryFeature"></article>
+          <div class="section-heading">
+            <h2 id="categoryHeading">Categories</h2>
+            <div class="controls">
+              <input
+                id="searchInput"
+                type="text"
+                placeholder="Search in this category..."
+                aria-label="Search stories"
+              />
+              <select id="dateFilter" aria-label="Filter by date">
+                <option value="all">Any date</option>
+                <option value="7">Last 7 days</option>
+                <option value="30">Last 30 days</option>
+                <option value="365">Last 1 year</option>
+              </select>
+              <select id="sortSelect" aria-label="Sort category stories">
+                <option value="latest">Latest</option>
+                <option value="popular">Most popular</option>
+              </select>
+              <a class="btn btn-secondary" href="./category.html?c=all">View All</a>
+            </div>
+          </div>
+
+          <div class="split-layout">
+            <aside class="side-panel">
+              <h3>All Categories</h3>
+              <div id="categoriesGrid" class="categories-grid categories-grid-compact"></div>
+            </aside>
+
+            <section class="content-panel">
+              <div id="storiesGrid" class="stories-grid"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="siteFooter"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>

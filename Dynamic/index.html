@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pulse Magazine</title>
+    <meta
+      name="description"
+      content="Pulse Magazine delivers curated editorial storytelling across tech, culture, music, and design."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-page="home">
+    <div class="reading-progress" id="readingProgress"></div>
+    <div id="siteHeader"></div>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <article class="hero-main" id="heroMain"></article>
+          <article class="hero-secondary" id="heroSecondary"></article>
+          <aside class="hero-side">
+            <h2>Popular Reads</h2>
+            <ul id="trendingList"></ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Editor's Picks</h2>
+          </div>
+          <div class="stories-grid" id="editorsPicksGrid"></div>
+        </div>
+      </section>
+
+      <section id="top-stories" class="section">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Latest Stories</h2>
+            <div class="controls">
+              <input
+                id="searchInput"
+                type="text"
+                placeholder="Search stories..."
+                aria-label="Search stories"
+              />
+              <select id="sortSelect" aria-label="Sort stories">
+                <option value="latest">Latest</option>
+                <option value="popular">Most popular</option>
+              </select>
+              <button class="filter-btn active" data-category="all">All</button>
+              <button class="filter-btn" data-category="tech">Tech</button>
+              <button class="filter-btn" data-category="culture">Culture</button>
+              <button class="filter-btn" data-category="music">Music</button>
+              <button class="filter-btn" data-category="design">Design</button>
+            </div>
+          </div>
+          <div id="storiesGrid" class="stories-grid"></div>
+        </div>
+      </section>
+
+      <section id="categories" class="section categories">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Browse by Category</h2>
+          </div>
+          <div class="container categories-grid" id="categoriesGrid"></div>
+        </div>
+      </section>
+
+      <section id="newsletter" class="section newsletter">
+        <div class="container newsletter-box reveal">
+          <h2>Get the Weekly Digest</h2>
+          <p>Curated stories, editor notes, and long-form recommendations.</p>
+          <form id="newsletterForm">
+            <input
+              id="emailInput"
+              type="email"
+              placeholder="Enter your email"
+              required
+              aria-label="Email address"
+            />
+            <button type="submit">Subscribe</button>
+          </form>
+          <p id="formMessage" class="form-message" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <div id="siteFooter"></div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

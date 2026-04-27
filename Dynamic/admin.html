@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CMS Admin • Pulse Magazine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-page="admin">
+    <div id="siteHeader"></div>
+    <main>
+      <section class="section">
+        <div class="container page-card">
+          <h1>Editorial CMS</h1>
+          <p class="muted">Create and curate stories for homepage placement.</p>
+
+          <form id="articleForm" class="form">
+            <label>Title<input name="title" required /></label>
+            <label>Slug<input name="slug" placeholder="optional-auto-generated" /></label>
+            <label>Subheadline<input name="subheadline" /></label>
+            <label>Excerpt<textarea name="excerpt" rows="2"></textarea></label>
+            <label>Body Paragraphs (one per line)<textarea name="content" rows="6"></textarea></label>
+            <label>Pull Quote<input name="pullQuote" /></label>
+            <label>Cover Image URL<input name="coverImage" /></label>
+            <label>Author Id<input name="authorId" placeholder="author-1" /></label>
+            <label>Category Slug<input name="categorySlug" placeholder="tech/culture/music/design" required /></label>
+            <label>Reading Time (mins)<input name="readingTime" type="number" min="1" value="5" /></label>
+            <label><input name="featured" type="checkbox" /> Featured</label>
+            <label><input name="editorsPick" type="checkbox" /> Editor's Pick</label>
+            <button class="btn" type="submit">Publish article</button>
+          </form>
+          <p id="adminMessage" class="form-message" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container page-card">
+          <h2>Current Articles</h2>
+          <div id="adminArticles" class="stories-grid"></div>
+        </div>
+      </section>
+    </main>
+    <div id="siteFooter"></div>
+    <script src="./app.js"></script>
+    <script src="./admin.js"></script>
+  </body>
+</html>
