@@ -7,6 +7,7 @@ require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 const DATA_PATH = path.join(__dirname, "data", "content.json");
 
 app.use(cors());
@@ -149,12 +150,12 @@ function getWelcomeEmailTemplate(email) {
       <div class="section">
         <h2>Next Steps 🚀</h2>
         <p>Visit Pulse Magazine to browse our latest stories and discover content that resonates with you.</p>
-        <a href="http://localhost:4000" class="cta-button">Explore Pulse Magazine</a>
+        <a href="/" class="cta-button">Explore Pulse Magazine</a>
       </div>
 
       <div class="section">
         <h2>Questions? 💬</h2>
-        <p>If you have any questions or feedback, feel free to reach out to us at <strong>contact@pulsemagazine.com</strong> or visit our <a href="http://localhost:4000/contact.html" style="color: #b4233c;">Contact Page</a>.</p>
+        <p>If you have any questions or feedback, feel free to reach out to us at <strong>contact@pulsemagazine.com</strong> or visit our <a href="/contact.html" style="color: #b4233c;">Contact Page</a>.</p>
       </div>
 
       <div class="section" style="border-top: 2px solid #e5e7eb; padding-top: 15px; font-size: 13px; color: #5f6672;">
@@ -164,8 +165,8 @@ function getWelcomeEmailTemplate(email) {
 
     <div class="footer">
       <p>© 2026 Pulse Magazine. Editorial storytelling platform.<br>
-      <a href="http://localhost:4000">Visit our website</a> | 
-      <a href="http://localhost:4000/contact.html">Contact us</a></p>
+      <a href="/">Visit our website</a> | 
+      <a href="/contact.html">Contact us</a></p>
       <p style="margin-top: 10px; font-size: 11px;">
         <a href="#" style="color: #5f6672;">Manage Preferences</a> | 
         <a href="#" style="color: #5f6672;">Unsubscribe</a>
@@ -206,12 +207,12 @@ function getWeeklyDigestTemplate(email, topArticles = []) {
   const articlesHtml = topArticles.slice(0, 5).map(article => `
     <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e5e7eb;">
       <h3 style="margin: 0 0 5px 0; color: #1f2328; font-size: 16px;">
-        <a href="http://localhost:4000/article.html?slug=${article.slug}" style="color: #b4233c; text-decoration: none;">
+        <a href="${BASE_URL}/article.html?slug=${article.slug}" style="color: #b4233c; text-decoration: none;">
           ${article.title}
         </a>
       </h3>
       <p style="margin: 5px 0; color: #5f6672; font-size: 13px;">${article.excerpt || ''}</p>
-      <a href="http://localhost:4000/article.html?slug=${article.slug}" style="color: #b4233c; text-decoration: none; font-weight: 600; font-size: 13px;">Read full story →</a>
+      <a href="${BASE_URL}/article.html?slug=${article.slug}" style="color: #b4233c; text-decoration: none; font-weight: 600; font-size: 13px;">Read full story →</a>
     </div>
   `).join('');
 
@@ -249,7 +250,7 @@ function getWeeklyDigestTemplate(email, topArticles = []) {
 
       <div class="section">
         <p style="text-align: center; margin-top: 30px;">
-          <a href="http://localhost:4000" style="display: inline-block; background: #b4233c; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: 600;">
+          <a href="${BASE_URL}" style="display: inline-block; background: #b4233c; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: 600;">
             View All Stories
           </a>
         </p>
@@ -474,7 +475,7 @@ app.get("/api/newsletter/subscribers", (req, res) => {
 
 app.get("/sitemap.xml", (_, res) => {
   const store = readStore();
-  const base = `http://localhost:${PORT}`;
+  const base = BASE_URL;
   const urls = [
     `${base}/index.html`,
     `${base}/category.html`,

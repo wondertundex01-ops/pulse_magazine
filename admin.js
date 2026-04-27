@@ -1,5 +1,5 @@
 (function () {
-  const API_BASE = "http://localhost:4000/api";
+  const API_BASE = "/api";
 
   const form = document.getElementById("articleForm");
   const message = document.getElementById("adminMessage");
