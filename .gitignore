@@ -1,0 +1,11 @@
+# dependencies
+node_modules/
+Dynamic/node_modules/
+
+# local env files
+.env
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
