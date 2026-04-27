@@ -453,7 +453,7 @@
       if (root) {
         root.insertAdjacentHTML(
           "afterbegin",
-          `<div class="notice"><h2>Backend not running</h2><p>Start the API server with <code>npm run dev</code> in the <code>Dynamic</code> folder.</p></div>`
+          `<div class="notice"><h2>Backend not running</h2><p>Start the API server with <code>npm start</code>.</p></div>`
         );
       }
     }
