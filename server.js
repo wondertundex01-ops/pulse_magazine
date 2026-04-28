@@ -33,39 +33,50 @@ function slugify(input) {
 
 // Email Configuration
 let transporter;
+let emailEnabled = false;
 
 // Initialize transporter with Ethereal Email (test service) or Gmail (production)
 async function initializeEmailTransporter() {
-  if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-    // Use Gmail if credentials provided
-    transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
-    });
-  } else {
-    // Use Ethereal Email for testing (works immediately without setup)
-    const testAccount = await nodemailer.createTestAccount();
-    transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
-      secure: false,
-      auth: {
-        user: testAccount.user,
-        pass: testAccount.pass
-      }
-    });
-    console.log("📧 Using Ethereal Email Test Service (no Gmail setup needed)");
+  try {
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      // Use Gmail if credentials provided
+      transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS
+        }
+      });
+    } else {
+      // Use Ethereal Email for testing (works immediately without setup)
+      const testAccount = await nodemailer.createTestAccount();
+      transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false,
+        auth: {
+          user: testAccount.user,
+          pass: testAccount.pass
+        }
+      });
+      console.log("📧 Using Ethereal Email Test Service (no Gmail setup needed)");
+    }
+
+    // Verify transporter connectivity before enabling email delivery
+    await transporter.verify();
+    emailEnabled = true;
+  } catch (err) {
+    transporter = null;
+    emailEnabled = false;
+    console.warn(
+      "Email transporter initialization failed. Newsletter subscriptions will still work, but email delivery is disabled.",
+      err
+    );
   }
 }
 
 // Call this at startup
-initializeEmailTransporter().catch(err => {
-  console.error("Email transporter initialization error:", err);
-  process.exit(1);
-});
+initializeEmailTransporter();
 
 // Email Templates
 function getWelcomeEmailTemplate(email) {
@@ -433,6 +444,17 @@ app.post("/api/newsletter", async (req, res) => {
     const emailTemplate = getWelcomeEmailTemplate(email);
     const topArticles = store.articles.slice(0, 5);
 
+    if (!emailEnabled || !transporter) {
+      return res.status(200).json({
+        message:
+          "✅ Successfully subscribed! Email delivery is currently disabled, but your subscription is saved.",
+        subscribed: true,
+        email: email,
+        note:
+          "The newsletter service is not available right now, so no welcome email was sent."
+      });
+    }
+
     // Send welcome email
     const info = await transporter.sendMail({
       from: process.env.EMAIL_USER || "noreply@pulsemagazine.com",
@@ -497,6 +519,10 @@ app.get("*", (_, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`Pulse Magazine running on http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Pulse Magazine running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

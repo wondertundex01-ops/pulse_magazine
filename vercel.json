@@ -12,11 +12,12 @@
       "dest": "server.js"
     },
     {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|svg|ico|json|html|map))",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "server.js"
     }
-  ],
-  "env": {
-    "BASE_URL": "@base_url"
-  }
+  ]
 }
