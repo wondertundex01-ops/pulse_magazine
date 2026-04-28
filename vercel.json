@@ -12,7 +12,15 @@
       "dest": "server.js"
     },
     {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|svg|ico|json|html|map))",
+      "src": "/sitemap.xml",
+      "dest": "server.js"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|map))",
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*\\.html)",
       "dest": "/$1"
     },
     {

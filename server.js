@@ -14,14 +14,31 @@ app.use(cors());
 app.use(express.json({ limit: "1mb" }));
 app.use(express.static(__dirname));
 
+// ── In-memory store (Vercel has a read-only filesystem) ────────────────────────
+// On startup we load content.json into memory.
+// Reads always use this in-memory copy (fast, works everywhere).
+// Writes update memory first, then try to persist to disk.
+// On Vercel the disk write fails silently — data survives the request but not
+// across cold-starts.  On localhost everything persists normally.
+let _store = null;
+
 function readStore() {
-  const raw = fs.readFileSync(DATA_PATH, "utf-8");
-  return JSON.parse(raw);
+  if (!_store) {
+    const raw = fs.readFileSync(DATA_PATH, "utf-8");
+    _store = JSON.parse(raw);
+  }
+  return _store;
 }
 
 function writeStore(next) {
-  fs.writeFileSync(DATA_PATH, JSON.stringify(next, null, 2), "utf-8");
+  _store = next; // always update in-memory copy
+  try {
+    fs.writeFileSync(DATA_PATH, JSON.stringify(next, null, 2), "utf-8");
+  } catch (_) {
+    // Filesystem is read-only (e.g. Vercel) — in-memory update is enough
+  }
 }
+
 
 function slugify(input) {
   return String(input || "")
