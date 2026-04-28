@@ -4,7 +4,85 @@
     categories: [],
     articles: [],
     authors: [],
+    isOffline: false,
   };
+
+  // ── Static fallback data (used when the server is not running) ──────────────
+  const STATIC_DATA = {
+    categories: [
+      { id: "cat-tech",    name: "Tech",    slug: "tech",    description: "AI, software, devices, and the future of product experiences." },
+      { id: "cat-culture", name: "Culture", slug: "culture", description: "Film, visual arts, and creator economy stories worth your time." },
+      { id: "cat-music",   name: "Music",   slug: "music",   description: "Industry shifts, sonic trends, and deep profiles of modern artists." },
+      { id: "cat-design",  name: "Design",  slug: "design",  description: "Architecture, product design, systems thinking, and urban futures." }
+    ],
+    authors: [
+      { id: "author-1", name: "Maya Adebayo",  bio: "Editor-at-large focused on cities, tech, and systems design.",         profileImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80" },
+      { id: "author-2", name: "Noah Mensah",   bio: "Culture columnist covering independent media and creative industries.", profileImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80" }
+    ],
+    articles: [
+      {
+        id: "art-1", title: "The New Urban Playbook: Designing Cities for Human Rhythm",
+        slug: "new-urban-playbook",
+        subheadline: "From transit-first corridors to mixed-use micro-districts, city teams are redesigning for daily life.",
+        excerpt: "A long-form look at how design and policy are reshaping modern city experiences.",
+        content: [
+          "The strongest urban projects begin with one simple premise: people should not have to choose between productivity and quality of life.",
+          "Across major regions, planners are replacing zoning silos with mixed-use ecosystems that shorten commute cycles and improve neighborhood cohesion.",
+          "This transition depends less on flashy technology and more on governance systems that align mobility, housing, and climate commitments."
+        ],
+        pullQuote: "Good city design makes daily life feel lighter, not louder.",
+        coverImage: "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1400&q=80",
+        authorId: "author-1", categorySlug: "design", tags: ["cities","design","policy"],
+        publishedAt: "2026-04-24T09:00:00.000Z", readingTime: 8, featured: true, editorsPick: true, views: 13240
+      },
+      {
+        id: "art-2", title: "AI Ops for Lean Teams: What Actually Scales",
+        slug: "ai-ops-for-lean-teams",
+        subheadline: "A practical framework for adoption without bloated tooling or messy workflows.",
+        excerpt: "How focused teams use AI to accelerate delivery while preserving editorial standards.",
+        content: [
+          "Small teams win when they automate repetitive work and reserve judgment-heavy decisions for humans.",
+          "The model is simple: one workflow at a time, clear quality gates, and weekly measurement.",
+          "Teams that over-automate too early often increase revision costs. Discipline is the differentiator."
+        ],
+        pullQuote: "Automation should reduce friction, not editorial standards.",
+        coverImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
+        authorId: "author-1", categorySlug: "tech", tags: ["ai","automation","operations"],
+        publishedAt: "2026-04-21T11:00:00.000Z", readingTime: 6, featured: true, editorsPick: true, views: 11901
+      },
+      {
+        id: "art-3", title: "Independent Studios Are Rebuilding Cultural Trust",
+        slug: "independent-studios-cultural-trust",
+        subheadline: "Small teams with clear voice are outperforming broad entertainment brands.",
+        excerpt: "Why local creative ecosystems are becoming globally influential.",
+        content: [
+          "Independents are succeeding because they can move from insight to release without committee drag.",
+          "Audience loyalty is now tied to perspective and consistency, not just scale.",
+          "The shift is creating room for sustainable, mission-driven media businesses."
+        ],
+        pullQuote: "People follow perspective before production budget.",
+        coverImage: "https://images.unsplash.com/photo-1507908708918-778587c9e563?auto=format&fit=crop&w=1400&q=80",
+        authorId: "author-2", categorySlug: "culture", tags: ["culture","media","studios"],
+        publishedAt: "2026-04-17T10:00:00.000Z", readingTime: 5, featured: false, editorsPick: true, views: 9780
+      },
+      {
+        id: "art-4", title: "The Return of Album Worlds",
+        slug: "return-of-album-worlds",
+        subheadline: "Artists are designing multi-format releases with stronger narrative arcs.",
+        excerpt: "A look at how musicians are blending audio, visuals, and live formats.",
+        content: [
+          "The album format is evolving from a playlist of tracks into a narrative system.",
+          "Visual storytelling, intimate venue runs, and creator-owned channels are central to this trend.",
+          "For listeners, the result is deeper attachment and longer retention."
+        ],
+        pullQuote: "Format is becoming part of the story again.",
+        coverImage: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1400&q=80",
+        authorId: "author-2", categorySlug: "music", tags: ["music","albums","storytelling"],
+        publishedAt: "2026-04-14T08:30:00.000Z", readingTime: 4, featured: false, editorsPick: false, views: 8874
+      }
+    ]
+  };
+  // ────────────────────────────────────────────────────────────────────────────
 
   const $ = (selector) => document.querySelector(selector);
   const getParam = (name) => new URLSearchParams(window.location.search).get(name);
@@ -424,15 +502,59 @@
     }
   }
 
-  async function loadCoreData() {
-    const [categories, articles, authors] = await Promise.all([
+  // ── Render helpers called after any data update ─────────────────────────────
+  function renderCurrentPage() {
+    const page = document.body?.dataset?.page || "home";
+    if (page === "home")     renderHome();
+    if (page === "category") renderCategoryPage();
+    if (page === "article")  renderArticlePage();
+  }
+
+  function showOfflineBanner() {
+    if (document.getElementById("offlineBanner")) return;
+    const banner = document.createElement("div");
+    banner.id = "offlineBanner";
+    banner.style.cssText = [
+      "position:fixed","bottom:20px","right:20px","z-index:9999",
+      "background:rgba(20,20,20,0.93)","color:#f9fafb","padding:14px 18px",
+      "border-radius:10px","font-size:13px","line-height:1.6",
+      "box-shadow:0 4px 24px rgba(0,0,0,0.55)","max-width:310px",
+      "border-left:4px solid #b4233c","backdrop-filter:blur(8px)",
+      "animation:slideIn .3s ease"
+    ].join(";");
+    banner.innerHTML =
+      "<strong style='display:block;margin-bottom:5px'>⚡ Offline / Preview mode</strong>" +
+      "Showing built-in content. For live CMS data, run:<br>" +
+      "<code style='background:#111;padding:2px 7px;border-radius:4px'>npm start</code>" +
+      " then open <a href='http://localhost:4000' style='color:#fca5a5'>localhost:4000</a>" +
+      "<span id='closeBanner' style='cursor:pointer;float:right;margin-top:-18px;font-size:16px;opacity:.5'>&#x2715;</span>";
+    document.body.appendChild(banner);
+    document.getElementById("closeBanner")
+      ?.addEventListener("click", () => banner.remove());
+  }
+
+  // ── Background API upgrade (only when served via http/https) ─────────────────
+  function tryApiUpgrade() {
+    // Skip entirely when opened as a local file — fetch would always fail
+    if (window.location.protocol === "file:") return;
+
+    Promise.all([
       apiGet("/categories"),
       apiGet("/articles"),
       apiGet("/authors"),
-    ]);
-    state.categories = categories;
-    state.articles = articles;
-    state.authors = authors;
+    ]).then(([categories, articles, authors]) => {
+      state.categories = categories;
+      state.articles   = articles;
+      state.authors    = authors;
+      state.isOffline  = false;
+      // Remove offline banner if it was showing
+      document.getElementById("offlineBanner")?.remove();
+      // Re-render with live data
+      renderCurrentPage();
+    }).catch(() => {
+      // API still unreachable on http — show banner
+      showOfflineBanner();
+    });
   }
 
   async function init() {
@@ -442,22 +564,27 @@
     setupReveal();
     setupContactForm();
 
-    try {
-      await loadCoreData();
-      const page = document.body?.dataset?.page || "home";
-      if (page === "home") renderHome();
-      if (page === "category") renderCategoryPage();
-      if (page === "article") renderArticlePage();
-    } catch (err) {
-      const root = document.querySelector("main .container");
-      if (root) {
-        root.insertAdjacentHTML(
-          "afterbegin",
-          `<div class="notice"><h2>Backend not running</h2><p>Start the API server with <code>npm start</code>.</p></div>`
-        );
-      }
-    }
+    // ── STEP 1: Pre-load static data synchronously so the page ALWAYS renders ──
+    state.categories = STATIC_DATA.categories;
+    state.articles   = STATIC_DATA.articles;
+    state.authors    = STATIC_DATA.authors;
+    state.isOffline  = true;
+
+    // ── STEP 2: Render immediately with static data ────────────────────────────
+    renderCurrentPage();
+
+    // ── STEP 3: Try to pull live data from the API in the background ───────────
+    // If the server is running, the content will silently update.
+    // If not, the page stays exactly as rendered above — no error, no blank page.
+    tryApiUpgrade();
   }
+
+  // Inject keyframe for banner slide-in
+  (function injectBannerAnimation() {
+    const style = document.createElement("style");
+    style.textContent = "@keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}";
+    document.head.appendChild(style);
+  })();
 
   init();
 })();
