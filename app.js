@@ -1,5 +1,8 @@
 (function () {
-  const API_BASE = "/api";
+  const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  const isCorrectPort = window.location.port === '4000';
+  const API_BASE = (isLocalDev && !isCorrectPort) ? "http://localhost:4000/api" : "/api";
+  
   const state = {
     categories: [],
     articles: [],
@@ -16,8 +19,8 @@
       { id: "cat-design",  name: "Design",  slug: "design",  description: "Architecture, product design, systems thinking, and urban futures." }
     ],
     authors: [
-      { id: "author-1", name: "Maya Adebayo",  bio: "Editor-at-large focused on cities, tech, and systems design.",         profileImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80" },
-      { id: "author-2", name: "Noah Mensah",   bio: "Culture columnist covering independent media and creative industries.", profileImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80" }
+      { id: "author-1", name: "Maya Adebayo",  bio: "Editor-at-large focused on cities, tech, and systems design.",         profileImage: "assets/images/author-maya-adebayo.jpg" },
+      { id: "author-2", name: "Noah Mensah",   bio: "Culture columnist covering independent media and creative industries.", profileImage: "assets/images/author-noah-mensah.jpg" }
     ],
     articles: [
       {
@@ -31,7 +34,7 @@
           "This transition depends less on flashy technology and more on governance systems that align mobility, housing, and climate commitments."
         ],
         pullQuote: "Good city design makes daily life feel lighter, not louder.",
-        coverImage: "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1400&q=80",
+        coverImage: "assets/images/article-future-of-cities.jpg",
         authorId: "author-1", categorySlug: "design", tags: ["cities","design","policy"],
         publishedAt: "2026-04-24T09:00:00.000Z", readingTime: 8, featured: true, editorsPick: true, views: 13240
       },
@@ -46,7 +49,7 @@
           "Teams that over-automate too early often increase revision costs. Discipline is the differentiator."
         ],
         pullQuote: "Automation should reduce friction, not editorial standards.",
-        coverImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
+        coverImage: "assets/images/article-ai-creativity.jpg",
         authorId: "author-1", categorySlug: "tech", tags: ["ai","automation","operations"],
         publishedAt: "2026-04-21T11:00:00.000Z", readingTime: 6, featured: true, editorsPick: true, views: 11901
       },
@@ -61,7 +64,7 @@
           "The shift is creating room for sustainable, mission-driven media businesses."
         ],
         pullQuote: "People follow perspective before production budget.",
-        coverImage: "https://images.unsplash.com/photo-1507908708918-778587c9e563?auto=format&fit=crop&w=1400&q=80",
+        coverImage: "assets/images/article-sustainable-fashion.jpg",
         authorId: "author-2", categorySlug: "culture", tags: ["culture","media","studios"],
         publishedAt: "2026-04-17T10:00:00.000Z", readingTime: 5, featured: false, editorsPick: true, views: 9780
       },
@@ -76,7 +79,7 @@
           "For listeners, the result is deeper attachment and longer retention."
         ],
         pullQuote: "Format is becoming part of the story again.",
-        coverImage: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1400&q=80",
+        coverImage: "assets/images/article-sound-diaspora.jpg",
         authorId: "author-2", categorySlug: "music", tags: ["music","albums","storytelling"],
         publishedAt: "2026-04-14T08:30:00.000Z", readingTime: 4, featured: false, editorsPick: false, views: 8874
       }

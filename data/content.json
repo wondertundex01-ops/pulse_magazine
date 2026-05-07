@@ -30,7 +30,7 @@
       "id": "author-1",
       "name": "Maya Adebayo",
       "bio": "Editor-at-large focused on cities, tech, and systems design.",
-      "profileImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80",
+      "profileImage": "assets/images/author-maya-adebayo.jpg",
       "socialLinks": {
         "x": "https://x.com/",
         "linkedin": "https://www.linkedin.com/"
@@ -40,7 +40,7 @@
       "id": "author-2",
       "name": "Noah Mensah",
       "bio": "Culture columnist covering independent media and creative industries.",
-      "profileImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80",
+      "profileImage": "assets/images/author-noah-mensah.jpg",
       "socialLinks": {
         "x": "https://x.com/"
       }
@@ -59,7 +59,7 @@
         "This transition depends less on flashy technology and more on governance systems that align mobility, housing, and climate commitments."
       ],
       "pullQuote": "Good city design makes daily life feel lighter, not louder.",
-      "coverImage": "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1400&q=80",
+      "coverImage": "assets/images/article-future-of-cities.jpg",
       "authorId": "author-1",
       "categorySlug": "design",
       "tags": [
@@ -85,7 +85,7 @@
         "Teams that over-automate too early often increase revision costs. Discipline is the differentiator."
       ],
       "pullQuote": "Automation should reduce friction, not editorial standards.",
-      "coverImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
+      "coverImage": "assets/images/article-ai-creativity.jpg",
       "authorId": "author-1",
       "categorySlug": "tech",
       "tags": [
@@ -111,7 +111,7 @@
         "The shift is creating room for sustainable, mission-driven media businesses."
       ],
       "pullQuote": "People follow perspective before production budget.",
-      "coverImage": "https://images.unsplash.com/photo-1507908708918-778587c9e563?auto=format&fit=crop&w=1400&q=80",
+      "coverImage": "assets/images/article-sustainable-fashion.jpg",
       "authorId": "author-2",
       "categorySlug": "culture",
       "tags": [
@@ -137,7 +137,7 @@
         "For listeners, the result is deeper attachment and longer retention."
       ],
       "pullQuote": "Format is becoming part of the story again.",
-      "coverImage": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1400&q=80",
+      "coverImage": "assets/images/article-sound-diaspora.jpg",
       "authorId": "author-2",
       "categorySlug": "music",
       "tags": [
